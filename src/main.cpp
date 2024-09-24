@@ -2,19 +2,24 @@
 
 #include "server.hpp"
 
-constexpr int EXPECTED_ARGUMENTS = 2;
+enum ProgramArguments : int
+{
+    ProgramName,
+    PortNumber,
+    EndFinal
+};
 
 int main(const int argc, char **argv)
 {
-    if (EXPECTED_ARGUMENTS != argc)
+    if (ProgramArguments::EndFinal != argc)
     {
-        std::cout << "Usage: " << argv[0] << " [port]" << std::endl;
+        std::cout << "Usage: " << argv[ProgramArguments::ProgramName] << " [port]" << std::endl;
         return EXIT_FAILURE;
     }
     int server_port;
     try
     {
-        server_port = std::stoi(argv[1]);
+        server_port = std::stoi(argv[ProgramArguments::PortNumber]);
     }
     catch (...)
     {
