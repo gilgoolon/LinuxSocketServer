@@ -5,7 +5,7 @@
 #include "socket.hpp"
 #include "auto_fd.hpp"
 
-class ServerSocket
+class ServerSocket final
 {
 public:
     explicit ServerSocket(int port);

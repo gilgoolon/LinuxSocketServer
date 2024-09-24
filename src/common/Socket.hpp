@@ -2,7 +2,7 @@
 #include "../defs.hpp"
 #include "auto_fd.hpp"
 
-class Socket
+class Socket final
 {
 public:
     explicit Socket(int socket_fd);

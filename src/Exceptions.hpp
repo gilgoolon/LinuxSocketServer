@@ -5,7 +5,7 @@
 #include <cerrno>
 #include <sstream>
 
-class ErrnoException : public std::exception
+class ErrnoException final : public std::exception
 {
 public:
     ErrnoException(int errnum = errno);

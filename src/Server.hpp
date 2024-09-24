@@ -2,7 +2,7 @@
 #include "common/server_socket.hpp"
 #include "common/socket.hpp"
 
-class Server
+class Server final
 {
 public:
     explicit Server(int port, size_t max_connections);

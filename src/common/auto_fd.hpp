@@ -4,7 +4,7 @@
 
 #include "../defs.hpp"
 
-struct FdCloser
+struct FdCloser final
 {
     void operator()(const int *fd) const
     {
