@@ -5,18 +5,13 @@
 #include "utils.hpp"
 
 Socket::Socket(int socket_fd)
-    : m_socket_fd(socket_fd)
+    : m_socket_fd(make_auto_fd(socket_fd))
 {
-}
-
-Socket::~Socket()
-{
-    ::close(m_socket_fd);
 }
 
 void Socket::send(const Buffer &data) const
 {
-    covered_call(UNIX_INT_ERROR_VALUE, ::send, m_socket_fd, data.data(), data.size(), 0);
+    covered_call(UNIX_INT_ERROR_VALUE, ::send, *m_socket_fd.get(), data.data(), data.size(), DEFAULT_NO_FLAGS);
 }
 
 Buffer Socket::receive() const
@@ -28,7 +23,7 @@ Buffer Socket::receive() const
         const size_t old_size = buff.size();
         buff.resize(old_size + buff_size);
 
-        const ssize_t bytes_read = covered_call(UNIX_INT_ERROR_VALUE, ::recv, m_socket_fd, buff.data() + old_size, buff_size, 0);
+        const ssize_t bytes_read = covered_call(UNIX_INT_ERROR_VALUE, ::recv, *m_socket_fd.get(), buff.data() + old_size, buff_size, DEFAULT_NO_FLAGS);
         buff.resize(old_size + bytes_read);
 
         if (bytes_read < buff_size)

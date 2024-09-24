@@ -10,7 +10,7 @@
             "name": "C++ Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/LinuxSocketServer",
+            "program": "${workspaceFolder}/LinuxSocketServer",
             "args": ["8000"],
             "environment": [{ "name": "config", "value": "Debug" }],
             "cwd": "${workspaceFolder}"

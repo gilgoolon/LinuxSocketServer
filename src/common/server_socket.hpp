@@ -3,18 +3,17 @@
 #include <memory>
 
 #include "socket.hpp"
+#include "auto_fd.hpp"
 
 class ServerSocket
 {
 public:
-    explicit ServerSocket(int socket_fd);
-
-    ~ServerSocket();
+    explicit ServerSocket(int port);
 
     void listen(size_t max_connections) const;
 
     std::unique_ptr<Socket> accept() const;
 
 private:
-    int m_socket_fd;
+    AutoFd m_socket_fd;
 };
