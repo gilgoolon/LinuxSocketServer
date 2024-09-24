@@ -1,5 +1,5 @@
 #pragma once
-#include "../Exceptions.h"
+#include "../Exceptions.hpp"
 
 template <typename Func, typename... Args>
 int covered_call(int error_value, Func func, Args... args)

@@ -1,6 +1,6 @@
 #pragma once
-#include "common/ServerSocket.h"
-#include "common/Socket.h"
+#include "common/ServerSocket.hpp"
+#include "common/Socket.hpp"
 
 class Server
 {

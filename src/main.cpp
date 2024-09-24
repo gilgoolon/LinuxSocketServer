@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "Server.h"
+#include "Server.hpp"
 
 constexpr int EXPECTED_ARGUMENTS = 2;
 

@@ -1,8 +1,8 @@
 #include <sys/socket.h>
 #include <unistd.h>
 
-#include "Socket.h"
-#include "Utils.h"
+#include "Socket.hpp"
+#include "Utils.hpp"
 
 Socket::Socket(int socket_fd)
     : m_socket_fd(socket_fd)

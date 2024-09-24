@@ -2,9 +2,9 @@
 #include <netinet/in.h>
 #include <unistd.h>
 
-#include "ServerSocket.h"
-#include "../Exceptions.h"
-#include "Utils.h"
+#include "ServerSocket.hpp"
+#include "../Exceptions.hpp"
+#include "Utils.hpp"
 
 ServerSocket::ServerSocket(int socket_fd)
     : m_socket_fd(socket_fd)

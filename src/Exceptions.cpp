@@ -1,4 +1,4 @@
-#include "Exceptions.h"
+#include "Exceptions.hpp"
 
 ErrnoException::ErrnoException(int errnum)
     : m_errnum(errnum)
