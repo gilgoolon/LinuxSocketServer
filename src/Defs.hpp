@@ -1,7 +1,8 @@
 #pragma once
 #include <vector>
+#include <cstdint>
 
-using Byte = unsigned char;
+using Byte = uint8_t;
 using Buffer = std::vector<Byte>;
 
 constexpr int UNIX_INT_ERROR_VALUE = -1;
