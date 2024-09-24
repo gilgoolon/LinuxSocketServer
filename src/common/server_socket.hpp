@@ -15,5 +15,5 @@ public:
     std::unique_ptr<Socket> accept() const;
 
 private:
-    AutoFd m_socket_fd;
+    const AutoFd m_socket_fd;
 };

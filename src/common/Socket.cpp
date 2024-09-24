@@ -4,7 +4,7 @@
 #include "socket.hpp"
 #include "utils.hpp"
 
-Socket::Socket(int socket_fd)
+Socket::Socket(const int socket_fd)
     : m_socket_fd(make_auto_fd(socket_fd))
 {
 }

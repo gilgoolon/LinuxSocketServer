@@ -6,7 +6,7 @@
 
 struct FdCloser
 {
-    void operator()(int *fd) const
+    void operator()(const int *fd) const
     {
         if (UNIX_INT_ERROR_VALUE != *fd)
         {

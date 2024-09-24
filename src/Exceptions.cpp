@@ -1,11 +1,8 @@
 #include "exceptions.hpp"
 
-ErrnoException::ErrnoException(int errnum)
-    : m_errnum(errnum)
+ErrnoException::ErrnoException(const int errnum)
+    : m_errnum(errnum), m_message("Errno " + std::to_string(m_errnum) + ": " + std::strerror(m_errnum))
 {
-    std::ostringstream oss;
-    oss << "Errno " << m_errnum << ": " << std::strerror(m_errnum);
-    m_message = oss.str();
 }
 
 const char *ErrnoException::what() const noexcept
