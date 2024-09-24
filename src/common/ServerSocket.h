@@ -1,7 +1,7 @@
 #pragma once
 #include <netinet/in.h>
 #include <memory>
-#include "common/Socket.h"
+#include "Socket.h"
 
 class ServerSocket
 {
