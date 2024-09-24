@@ -3,8 +3,8 @@
 
 #include "server.hpp"
 
-Server::Server(std::unique_ptr<ServerSocket> server_socket, const size_t max_connections)
-    : m_server_socket(std::move(server_socket)), m_max_connections(max_connections)
+Server::Server(const int port, const size_t max_connections)
+    : m_server_socket(std::make_unique<ServerSocket>(port)), m_max_connections(max_connections)
 {
 }
 
@@ -38,9 +38,4 @@ void Server::handle_client(const std::unique_ptr<Socket> client_socket) const
     {
         std::cout << "Failed to handle client. Error: " << ex.what() << std::endl;
     }
-}
-
-std::unique_ptr<Server> create_server(const int port, const size_t max_connections)
-{
-    return std::make_unique<Server>(std::make_unique<ServerSocket>(port), max_connections);
 }

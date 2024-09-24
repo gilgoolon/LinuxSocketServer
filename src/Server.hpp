@@ -5,7 +5,7 @@
 class Server
 {
 public:
-    explicit Server(std::unique_ptr<ServerSocket> server_socket, size_t max_connections);
+    explicit Server(int port, size_t max_connections);
 
     void run() const;
 
