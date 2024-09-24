@@ -1,7 +1,7 @@
 #include <thread>
 #include <iostream>
 
-#include "Server.hpp"
+#include "server.hpp"
 
 Server::Server(std::unique_ptr<ServerSocket> server_socket, size_t max_connections)
     : m_server_socket(std::move(server_socket)), m_max_connections(max_connections)

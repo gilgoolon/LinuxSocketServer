@@ -1,5 +1,5 @@
 #pragma once
-#include "../Defs.hpp"
+#include "../defs.hpp"
 
 class Socket
 {

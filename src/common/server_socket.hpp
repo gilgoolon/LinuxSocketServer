@@ -2,7 +2,7 @@
 #include <netinet/in.h>
 #include <memory>
 
-#include "Socket.hpp"
+#include "socket.hpp"
 
 class ServerSocket
 {
