@@ -3,13 +3,14 @@
 #include <memory>
 #include "common/Socket.h"
 
-class ServerSocket {
+class ServerSocket
+{
 public:
     explicit ServerSocket(int socket_fd);
 
     ~ServerSocket();
 
-    void bind(const sockaddr_in& server_address) const;
+    void bind(const sockaddr_in &server_address) const;
 
     void listen(size_t max_connections) const;
 

@@ -31,7 +31,8 @@ Buffer Socket::receive() const
         const ssize_t bytes_read = covered_call(UNIX_INT_ERROR_VALUE, ::recv, m_socket_fd, buff.data() + old_size, buff_size, 0);
         buff.resize(old_size + bytes_read);
 
-        if (bytes_read < buff_size) {
+        if (bytes_read < buff_size)
+        {
             break;
         }
     }

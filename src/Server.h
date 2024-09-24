@@ -2,7 +2,8 @@
 #include "ServerSocket.h"
 #include "common/Socket.h"
 
-class Server {
+class Server
+{
 public:
     explicit Server(std::unique_ptr<ServerSocket> server_socket, size_t max_connections);
 

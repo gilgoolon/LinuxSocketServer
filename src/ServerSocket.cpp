@@ -17,9 +17,9 @@ ServerSocket::~ServerSocket()
     ::close(m_socket_fd);
 }
 
-void ServerSocket::bind(const sockaddr_in& server_address) const
+void ServerSocket::bind(const sockaddr_in &server_address) const
 {
-    covered_call(-1, ::bind, m_socket_fd, reinterpret_cast<const sockaddr*>(&server_address), sizeof(server_address));
+    covered_call(-1, ::bind, m_socket_fd, reinterpret_cast<const sockaddr *>(&server_address), sizeof(server_address));
 }
 
 void ServerSocket::listen(size_t max_connections) const

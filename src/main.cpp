@@ -3,9 +3,10 @@
 
 constexpr int EXPECTED_ARGUMENTS = 2;
 
-int main(const int argc, char** argv)
+int main(const int argc, char **argv)
 {
-    if (EXPECTED_ARGUMENTS != argc) {
+    if (EXPECTED_ARGUMENTS != argc)
+    {
         std::cout << "Usage: " << argv[0] << " [port]" << std::endl;
         return 1;
     }

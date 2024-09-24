@@ -1,13 +1,14 @@
 #pragma once
 #include "../Defs.h"
 
-class Socket {
+class Socket
+{
 public:
     explicit Socket(int socket_fd);
 
     ~Socket();
 
-    void send(const Buffer& data) const;
+    void send(const Buffer &data) const;
 
     Buffer receive() const;
 
