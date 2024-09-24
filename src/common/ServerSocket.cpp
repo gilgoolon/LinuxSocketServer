@@ -1,10 +1,9 @@
-#include <stdexcept>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <unistd.h>
 
 #include "ServerSocket.h"
 #include "../Exceptions.h"
-#include <unistd.h>
 #include "Utils.h"
 
 ServerSocket::ServerSocket(int socket_fd)
