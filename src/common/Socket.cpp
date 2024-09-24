@@ -17,19 +17,14 @@ void Socket::send(const Buffer &data) const
 Buffer Socket::receive() const
 {
     Buffer buff;
-    while (true)
+    const size_t buff_size = DEFAULT_BUFF_SIZE;
+    ssize_t bytes_read;
+    do
     {
-        const size_t buff_size = DEFAULT_BUFF_SIZE;
         const size_t old_size = buff.size();
         buff.resize(old_size + buff_size);
-
-        const ssize_t bytes_read = covered_call(UNIX_INT_ERROR_VALUE, ::recv, *m_socket_fd.get(), buff.data() + old_size, buff_size, DEFAULT_NO_FLAGS);
+        bytes_read = covered_call(UNIX_INT_ERROR_VALUE, ::recv, *m_socket_fd.get(), buff.data() + old_size, buff_size, DEFAULT_NO_FLAGS);
         buff.resize(old_size + bytes_read);
-
-        if (bytes_read < buff_size)
-        {
-            break;
-        }
-    }
+    } while (bytes_read >= buff_size);
     return buff;
 }
