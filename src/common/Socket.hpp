@@ -1,5 +1,5 @@
 #pragma once
-#include "../defs.hpp"
+#include "../buffer.hpp"
 #include "auto_fd.hpp"
 
 class Socket final
