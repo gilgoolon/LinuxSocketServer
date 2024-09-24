@@ -42,5 +42,5 @@ void Server::handle_client(const std::unique_ptr<Socket> client_socket) const
 
 std::unique_ptr<Server> create_server(const int port, const size_t max_connections)
 {
-    return std::make_unique<Server>(create_server_socket(port), max_connections);
+    return std::make_unique<Server>(std::make_unique<ServerSocket>(port), max_connections);
 }

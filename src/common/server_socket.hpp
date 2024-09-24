@@ -11,8 +11,6 @@ public:
 
     ~ServerSocket();
 
-    void bind(const sockaddr_in &server_address) const;
-
     void listen(size_t max_connections) const;
 
     std::unique_ptr<Socket> accept() const;
@@ -20,5 +18,3 @@ public:
 private:
     int m_socket_fd;
 };
-
-std::unique_ptr<ServerSocket> create_server_socket(int port);
