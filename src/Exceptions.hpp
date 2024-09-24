@@ -13,6 +13,6 @@ public:
     const char *what() const noexcept override;
 
 private:
-    const int m_errnum;
-    const std::string m_message;
+    const int _errnum;
+    const std::string _message;
 };

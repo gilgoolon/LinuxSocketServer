@@ -1,11 +1,11 @@
 #include "exceptions.hpp"
 
 ErrnoException::ErrnoException(const int errnum)
-    : m_errnum(errnum), m_message("Errno " + std::to_string(m_errnum) + ": " + std::strerror(m_errnum))
+    : _errnum(errnum), _message("Errno " + std::to_string(_errnum) + ": " + std::strerror(_errnum))
 {
 }
 
 const char *ErrnoException::what() const noexcept
 {
-    return m_message.c_str();
+    return _message.c_str();
 }

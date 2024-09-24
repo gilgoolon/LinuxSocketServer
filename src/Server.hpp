@@ -10,10 +10,8 @@ public:
     void run() const;
 
 private:
-    const std::unique_ptr<ServerSocket> m_server_socket;
-    const size_t m_max_connections;
+    const std::unique_ptr<ServerSocket> _server_socket;
+    const size_t _max_connections;
 
     void handle_client(std::unique_ptr<Socket> client_socket) const;
 };
-
-std::unique_ptr<Server> create_server(int port, size_t max_connections);

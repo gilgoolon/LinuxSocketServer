@@ -12,5 +12,5 @@ public:
     Buffer receive() const;
 
 private:
-    const AutoFd m_socket_fd;
+    const AutoFd _socket_fd;
 };

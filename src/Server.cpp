@@ -4,18 +4,18 @@
 #include "server.hpp"
 
 Server::Server(const int port, const size_t max_connections)
-    : m_server_socket(std::make_unique<ServerSocket>(port)), m_max_connections(max_connections)
+    : _server_socket(std::make_unique<ServerSocket>(port)), _max_connections(max_connections)
 {
 }
 
 void Server::run() const
 {
-    m_server_socket->listen(m_max_connections);
+    _server_socket->listen(_max_connections);
     while (true)
     {
         try
         {
-            auto client_socket = m_server_socket->accept();
+            auto client_socket = _server_socket->accept();
             std::thread client_handler_thread(&Server::handle_client, this, std::move(client_socket));
             client_handler_thread.detach();
         }
