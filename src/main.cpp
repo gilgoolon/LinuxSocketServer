@@ -11,7 +11,15 @@ int main(const int argc, char **argv)
         std::cout << "Usage: " << argv[0] << " [port]" << std::endl;
         return EXIT_FAILURE;
     }
-    const int server_port = std::stoi(argv[1]);
+    int server_port;
+    try
+    {
+        server_port = std::stoi(argv[1]);
+    }
+    catch (...)
+    {
+        std::cout << "Please enter a valid port number." << std::endl;
+    }
     const size_t max_connections = 10;
     std::cout << "Running server on port: " << server_port << std::endl;
     try
