@@ -24,7 +24,16 @@ Buffer Socket::receive() const
         const size_t old_size = buff.size();
         buff.resize(old_size + buff_size);
         bytes_read = covered_call(UNIX_INT_ERROR_VALUE, ::recv, *_socket_fd.get(), buff.data() + old_size, buff_size, DEFAULT_NO_FLAGS);
+        if (!bytes_read)
+        {
+            throw ClientDisconnectedException();
+        }
         buff.resize(old_size + bytes_read);
     } while (bytes_read >= buff_size);
     return buff;
+}
+
+void Socket::shutdown() const
+{
+    covered_call(UNIX_INT_ERROR_VALUE, ::shutdown, *_socket_fd.get(), SHUT_RDWR);
 }

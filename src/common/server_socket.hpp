@@ -8,11 +8,13 @@
 class ServerSocket final
 {
 public:
-    explicit ServerSocket(int port);
+    explicit ServerSocket(uint32_t port);
 
     void listen(size_t max_connections) const;
 
     std::unique_ptr<Socket> accept() const;
+
+    void shutdown();
 
 private:
     const AutoFd _socket_fd;

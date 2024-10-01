@@ -16,3 +16,7 @@ private:
     const int _errnum;
     const std::string _message;
 };
+
+class ClientDisconnectedException final : public std::exception
+{
+};
