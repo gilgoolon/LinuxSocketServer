@@ -8,7 +8,7 @@
 class ServerSocket final
 {
 public:
-    explicit ServerSocket(int port);
+    explicit ServerSocket(uint32_t port);
 
     void listen(size_t max_connections) const;
 

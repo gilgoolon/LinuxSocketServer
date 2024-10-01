@@ -6,9 +6,9 @@
 #include "server_socket.hpp"
 #include "utils.hpp"
 
-ServerSocket::ServerSocket(const int port) : _socket_fd(
-                                                 make_auto_fd(covered_call(UNIX_INT_ERROR_VALUE, &::socket, AF_INET,
-                                                                           SOCK_STREAM, DEFAULT_NO_FLAGS)))
+ServerSocket::ServerSocket(const uint32_t port) : _socket_fd(
+                                                      make_auto_fd(covered_call(UNIX_INT_ERROR_VALUE, &::socket, AF_INET,
+                                                                                SOCK_STREAM, DEFAULT_NO_FLAGS)))
 {
     sockaddr_in server_address;
     server_address.sin_family = AF_INET;

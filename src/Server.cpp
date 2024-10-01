@@ -5,20 +5,12 @@
 
 #include "server.hpp"
 #include "exceptions.hpp"
+#include "common/utils.hpp"
 
-static Server *_instance;
-
-Server::Server(const int port, const size_t max_connections)
+Server::Server(const uint32_t port, const size_t max_connections)
     : _server_socket(std::make_unique<ServerSocket>(port)), _max_connections(max_connections), _running(true)
 {
-    struct sigaction action;
-    action.sa_handler = server_signal_handler;
-    sigemptyset(&action.sa_mask);
-    action.sa_flags = 0;
-
-    sigaction(SIGINT, &action, nullptr);
-
-    _instance = this;
+    register_signal_handler();
 }
 
 void Server::run()
@@ -41,9 +33,14 @@ void Server::run()
     }
 }
 
-Server &Server::get_instance()
+std::shared_ptr<Server> Server::get_instance(const uint32_t port, const size_t max_connections)
 {
-    return *_instance;
+    static std::shared_ptr<Server> _instance;
+    if (_instance == nullptr)
+    {
+        _instance = std::make_shared<Server>(port, max_connections);
+    }
+    return _instance;
 }
 
 void Server::handle_client(const std::unique_ptr<Socket> &client_socket)
@@ -64,7 +61,7 @@ void Server::handle_client(const std::unique_ptr<Socket> &client_socket)
     {
         std::cout << "Failed to handle client. Error: " << ex.what() << std::endl;
     }
-    std::remove(_active_connections.begin(), _active_connections.end(), client_socket), _active_connections.end();
+    std::remove(_active_connections.begin(), _active_connections.end(), client_socket);
 }
 
 void Server::singal_handler(int signal)
@@ -81,5 +78,14 @@ void Server::singal_handler(int signal)
 
 void Server::server_signal_handler(int signal)
 {
-    get_instance().singal_handler(signal);
+    get_instance(OPTIONAL_IGNORED, OPTIONAL_IGNORED)->singal_handler(signal);
+}
+
+void Server::register_signal_handler()
+{
+    struct sigaction action;
+    action.sa_handler = server_signal_handler;
+    covered_call(UNIX_INT_ERROR_VALUE, sigemptyset, &action.sa_mask);
+    action.sa_flags = DEFAULT_NO_FLAGS;
+    covered_call(UNIX_INT_ERROR_VALUE, sigaction, SIGINT, &action, OPTIONAL_NO_OUTPUT);
 }
