@@ -14,6 +14,8 @@ public:
 
     std::unique_ptr<Socket> accept() const;
 
+    void shutdown();
+
 private:
     const AutoFd _socket_fd;
 };

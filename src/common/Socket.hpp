@@ -11,6 +11,8 @@ public:
 
     Buffer receive() const;
 
+    void shutdown() const;
+
 private:
     const AutoFd _socket_fd;
 };

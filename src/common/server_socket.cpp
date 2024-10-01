@@ -31,3 +31,8 @@ std::unique_ptr<Socket> ServerSocket::accept() const
         covered_call(UNIX_INT_ERROR_VALUE, ::accept, *_socket_fd.get(),
                      OPTIONAL_NO_OUTPUT, OPTIONAL_NO_OUTPUT));
 }
+
+void ServerSocket::shutdown()
+{
+    covered_call(UNIX_INT_ERROR_VALUE, ::shutdown, *_socket_fd.get(), SHUT_RDWR);
+}
