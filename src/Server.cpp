@@ -2,13 +2,17 @@
 #include <iostream>
 #include <algorithm>
 #include <signal.h>
+#include <mutex>
 
 #include "server.hpp"
 #include "exceptions.hpp"
 #include "common/utils.hpp"
 
-Server::Server(const uint32_t port, const size_t max_connections)
-    : _server_socket(std::make_unique<ServerSocket>(port)), _max_connections(max_connections), _running(true)
+static size_t _max_connections;
+static uint32_t _port;
+
+Server::Server()
+    : _server_socket(std::make_unique<ServerSocket>(_port)), _running(true)
 {
     register_signal_handler();
 }
@@ -33,13 +37,22 @@ void Server::run()
     }
 }
 
-std::shared_ptr<Server> Server::get_instance(const uint32_t port, const size_t max_connections)
+std::shared_ptr<Server> _instance;
+void Server::init_instance()
 {
-    static std::shared_ptr<Server> _instance;
+    struct server_make_shared_enabler : public Server
+    {
+    };
     if (_instance == nullptr)
     {
-        _instance = std::make_shared<Server>(port, max_connections);
+        _instance = std::make_shared<server_make_shared_enabler>();
     }
+}
+
+std::shared_ptr<Server> Server::get_instance()
+{
+    static std::once_flag singleton_flag;
+    std::call_once(singleton_flag, init_instance);
     return _instance;
 }
 
@@ -78,7 +91,7 @@ void Server::singal_handler(int signal)
 
 void Server::server_signal_handler(int signal)
 {
-    get_instance(OPTIONAL_IGNORED, OPTIONAL_IGNORED)->singal_handler(signal);
+    get_instance()->singal_handler(signal);
 }
 
 void Server::register_signal_handler()
@@ -88,4 +101,10 @@ void Server::register_signal_handler()
     covered_call(UNIX_INT_ERROR_VALUE, sigemptyset, &action.sa_mask);
     action.sa_flags = DEFAULT_NO_FLAGS;
     covered_call(UNIX_INT_ERROR_VALUE, sigaction, SIGINT, &action, OPTIONAL_NO_OUTPUT);
+}
+
+void Server::init(uint32_t port, size_t max_connections)
+{
+    _port = port;
+    _max_connections = max_connections;
 }

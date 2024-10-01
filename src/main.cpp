@@ -29,7 +29,8 @@ int main(const int argc, char **argv)
     std::cout << "Running server on port: " << server_port << std::endl;
     try
     {
-        auto server = Server::get_instance(server_port, max_connections);
+        Server::init(server_port, max_connections);
+        auto server = Server::get_instance();
         server->run();
     }
     catch (const std::exception &ex)
